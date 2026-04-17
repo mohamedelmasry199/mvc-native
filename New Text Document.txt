@@ -1,0 +1,1 @@
+PS D:\xampp\htdocs\mvc revision> php -S localhost:8080   ->to run php websites
