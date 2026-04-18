@@ -10,7 +10,8 @@
 <body>
 
 <?php include __DIR__ . '/../partials/navbar.php'; ?>
-
+<?php
+// var_dump(app\core\Application::$app->user);?>
 <div class="container mt-5">
     <?php if ($flash = \app\core\Application::$app->session->getFlash('success')): ?>
         <div class="alert alert-success">

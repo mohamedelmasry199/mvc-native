@@ -15,6 +15,10 @@ class User extends DbModel
     public string $password = '';
     public int $status = self::STATUS_INACTIVE;
     public string $passwordConfirm = '';
+    public static function primaryKey(): string
+    {
+        return 'id';
+    }
     public function save()
     {
         $this->status = self::STATUS_INACTIVE;
@@ -57,4 +61,5 @@ class User extends DbModel
             'passwordConfirm' => 'Confirm Password'
         ];
     }
+
 }

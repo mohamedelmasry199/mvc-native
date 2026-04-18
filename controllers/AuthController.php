@@ -3,14 +3,31 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\models\LoginForm;
 use app\models\User;
 
 class AuthController extends Controller {
-    public function login()
+    public function login(Request $request)
     {
+        if($request->isPost()) {
+            $loginForm = new LoginForm();
+            $loginForm->loadData($request->getBody());
+            if($loginForm->validate() && $loginForm->login()) {
+                 Application::$app->session->setFlash('success', 'Thanks for logging in');
+                 Application::$app->response->redirect('/');
+
+            }
+        }
 
         $this->setLayout('auth');
-        return $this->render('login');
+        return $this->render('login',[
+            'model' =>new LoginForm()
+        ]);
+             // $body = $request->getBody();
+            // echo "<pre>";
+            // var_dump($body);
+            // echo "</pre>";
+            // exit;
     }
     public function register(Request $request)
     {
@@ -22,7 +39,7 @@ class AuthController extends Controller {
                 Application::$app->session->setFlash('success', 'Thanks for registering');
                  Application::$app->response->redirect('/');
             }
-             
+
             }
 
         $this->setLayout('auth');

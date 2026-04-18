@@ -12,7 +12,8 @@ $config =[
         'dsn' => $_ENV['DB_DSN'] ?? '',
         'user' => $_ENV['DB_USER'] ?? '',
         'password' => $_ENV['DB_PASSWORD'] ?? '',
-    ]
+    ],
+    'userClass' => \app\models\User::class
 ];
 $app = new Application(dirname(__DIR__), $config);
 // $app->router->get('/', 'home'); // Assuming you have a view named 'home.php' in your views directory
@@ -29,6 +30,10 @@ $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
+$app->router->get('/logout', function() {
+    Application::$app->logout();
+    Application::$app->response->redirect('/');
+});
 $app->run();
 
 // echo "Hello, World! This is a simple PHP application ";
