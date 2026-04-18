@@ -41,7 +41,7 @@ class Field{
             %s
         </div>
         ',
-        ucfirst($this->attribute), // label
+        $this->model->getLabel($this->attribute), // label
         $this->type,               // input type
         $this->attribute,          // input name
         htmlspecialchars($value),  // safe value

@@ -24,11 +24,12 @@ abstract class Model {
     {
         foreach($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};
+
             foreach($rules as $rule) {
                 $ruleName = $rule;
-                if(is_array($rule)) {
-                    $ruleName = $rule[0];
-                }
+               if (is_array($rule) && isset($rule[0])) {
+    $ruleName = $rule[0];
+}
                 if($ruleName === self::RULE_REQUIRED && !$value) {
                     $this->addError($attribute, self::RULE_REQUIRED);
                 }
@@ -42,6 +43,7 @@ abstract class Model {
                     $this->addError($attribute, self::RULE_MAX, $rule);
                 }
                 if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
+                    $rule['match'] = $this->getLabel($rule['match']) ?? $rule['match'];
                     $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
                 if($ruleName === self::RULE_UNIQUE) {
@@ -53,7 +55,7 @@ abstract class Model {
                     $statement->execute();
                     $record = $statement->fetchObject();
                     if($record) {
-                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute)??$attribute]);
                     }
                 }
             }
@@ -85,6 +87,13 @@ abstract class Model {
     public function getFirstError($attribute)
     {
         return $this->errors[$attribute][0] ?? false;
+    }
+    public function labels(){
+        return [];
+    }
+    public function getLabel($attribute)
+    {
+        return $this->labels()[$attribute] ?? $attribute;
     }
     // public function getErrors()
     // {

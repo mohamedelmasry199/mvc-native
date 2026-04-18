@@ -12,6 +12,11 @@
 <?php include __DIR__ . '/../partials/navbar.php'; ?>
 
 <div class="container mt-5">
+    <?php if ($flash = \app\core\Application::$app->session->getFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= $flash ?>
+        </div>
+    <?php endif; ?>
     {{ content }}
 </div>
 
