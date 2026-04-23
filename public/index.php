@@ -30,10 +30,8 @@ $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
-$app->router->get('/logout', function() {
-    Application::$app->logout();
-    Application::$app->response->redirect('/');
-});
+$app->router->get('/logout', [AuthController::class, 'logout']);
+$app->router->get('/profile', [AuthController::class, 'profile']);
 $app->run();
 
 // echo "Hello, World! This is a simple PHP application ";

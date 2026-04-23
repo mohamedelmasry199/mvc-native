@@ -1,16 +1,17 @@
 <?php
 namespace app\core;
 use app\core\Router;
-use app\models\User;
 
 class Application{
     public $userClass;
+public string $layout = 'main';
+
 public Router $router;
 public static $ROOT_DIR;
 public Request $request;
 public Response $response;
 public static Application $app;
-public Controller $controller;
+public ?Controller $controller = null;
 public Database $db;
 public Session $session;
 public ?DbModel $user;
@@ -35,7 +36,14 @@ public ?DbModel $user;
     }
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->response->setStatusCode($e->getCode());
+            echo $this->router->renderView('_errors', [
+                'exception' => $e
+            ]);
+        }
     }
     public function setController(Controller $controller)
     {

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="home">MySite</a>
+        <a class="navbar-brand" href="/">MySite</a>
 
         <button
             class="navbar-toggler"
@@ -15,11 +15,11 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="home">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
 
                 <li class="nav-item">

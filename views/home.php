@@ -1,8 +1,12 @@
 <h1 class="mb-4">
     Welcome
     <?php
-        echo (\app\core\Application::$app->user->firstname ?? 'Guest') . ' ' .
-             (\app\core\Application::$app->user->lastname ?? '');
+    if(\app\core\Application::isGuest()) {
+        echo ('Guest');}
+        else {
+            echo \app\core\Application::$app->user->name;
+        }
+
     ?> 👋
 </h1>
 <div class="p-5 bg-light rounded">
