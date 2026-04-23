@@ -1,17 +1,16 @@
 <h1>Contact Us</h1>
 
-<form class="mt-4" action="" method="post">
-    <div class="mb-3">
-        <input name="name" type="text" class="form-control" placeholder="Your Name">
-    </div>
-
-    <div class="mb-3">
-        <input name="email" type="email" class="form-control" placeholder="Your Email">
-    </div>
-
-    <div class="mb-3">
-        <textarea name="message" class="form-control" placeholder="Message"></textarea>
-    </div>
-
-    <button class="btn btn-primary">Send</button>
-</form>
+<!-- $form = Form::begin('', 'post');
+echo $form->field($model, 'email');
+echo $form->field($model, 'password')->passwordField();
+echo $form->submitButton('Login'); -->
+<?php
+use app\core\form\Form;
+$form = Form::begin('', 'post');
+echo $form->field($model, 'name');
+echo $form->field($model, 'email');
+echo $form->field($model, 'subject');
+echo $form->field($model, 'body')->textareaField();
+echo $form->submitButton('Send');
+Form::end();
+?>

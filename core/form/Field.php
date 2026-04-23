@@ -55,5 +55,37 @@ class Field{
             : ''
     );
 }
+public function textareaField()
+{
+    $hasError = $this->model->hasError($this->attribute) ? 'is-invalid' : '';
+    $value = $this->model->{$this->attribute} ?? '';
+    $error = $this->model->getFirstError($this->attribute);
 
+    return sprintf(
+        '
+        <div class="mb-3">
+            <label>%s</label>
+
+            <textarea
+                name="%s"
+                class="form-control %s"
+            >%s</textarea>
+
+            %s
+        </div>
+        ',
+        $this->model->getLabel($this->attribute), // label
+        $this->attribute,          // textarea name
+        $hasError,                 // bootstrap invalid class
+        htmlspecialchars($value),  // safe value
+
+        $this->model->hasError($this->attribute)
+            ? sprintf(
+                '<div class="invalid-feedback">%s</div>',
+                $error
+            )
+            : ''
+    );
+
+}
 }

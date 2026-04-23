@@ -4,7 +4,7 @@
     if(\app\core\Application::isGuest()) {
         echo ('Guest');}
         else {
-            echo \app\core\Application::$app->user->name;
+            echo \app\core\Application::$app->user->getDisplayName();
         }
 
     ?> 👋

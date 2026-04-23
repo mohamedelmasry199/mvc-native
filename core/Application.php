@@ -5,6 +5,7 @@ use app\core\Router;
 class Application{
     public $userClass;
 public string $layout = 'main';
+public $view;
 
 public Router $router;
 public static $ROOT_DIR;
@@ -33,6 +34,7 @@ public ?DbModel $user;
         else {
             $this->user = null;
         }
+        $this->view = new View();
     }
     public function run()
     {
@@ -40,7 +42,7 @@ public ?DbModel $user;
             echo $this->router->resolve();
         } catch (\Exception $e) {
             $this->response->setStatusCode($e->getCode());
-            echo $this->router->renderView('_errors', [
+            echo $this->view->renderView('_errors', [
                 'exception' => $e
             ]);
         }
